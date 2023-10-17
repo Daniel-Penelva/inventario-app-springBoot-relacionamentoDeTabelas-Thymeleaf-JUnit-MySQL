@@ -1,10 +1,12 @@
 package com.sistema.inventarioapp.produto;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.sistema.inventarioapp.categoria.Categoria;
@@ -34,7 +36,8 @@ public class ProdutoController {
 
     @PostMapping("/produtos/guardar")
     public String criarProduto(Produto produto){
-        produtoRepository.save(produto);
+
+        produtoRepository.save(produto); 
         return "redirect:/";
     }
 
@@ -45,6 +48,27 @@ public class ProdutoController {
 
         model.addAttribute("listaProdutos", listaProdutos);
         return "/produtos";
+    }
+
+    @GetMapping("/produtos/editar/{id}")
+    public String mostrarFormularioEditarProduto(@PathVariable("id") Integer id, Model model){
+
+        // .get() é usado para obter o objeto Produto do Optional<Produto> retornado pelo findById.
+        
+        Produto produto = produtoRepository.findById(id).get();
+        model.addAttribute("produto", produto);
+        
+      /*  Ou pode fazer assim:
+      
+        Optional<Produto> produto = produtoRepository.findById(id);
+        model.addAttribute("produto", produto.get());
+        */ 
+
+        // Recupera a lista de categoria
+        List<Categoria> listaCategorias = categoriaRepository.findAll();
+        model.addAttribute("listaCategorias", listaCategorias);
+
+        return "produto_formulario";
     }
     
 }

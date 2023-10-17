@@ -51,6 +51,7 @@
               <th scope="col">Nome</th>
               <th scope="col">Preço</th>
               <th scope="col">Categoria</th>
+              <th scope="col">Editar</th>
             </tr>
           </thead>
           <tbody>
@@ -59,6 +60,7 @@
               <td th:text="${produto.nome}"></td>
               <td th:text="${produto.preco}"></td>
               <td th:text="${produto.categoria.nome}"></td>
+              <td><a th:href="@{'/produtos/editar'+'/'+${produto.id}}" class="btn btn-info">Editar</a></td>
             </tr>
           </tbody>
         </table>

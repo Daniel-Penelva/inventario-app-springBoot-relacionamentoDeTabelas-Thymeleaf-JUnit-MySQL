@@ -39,12 +39,21 @@
     </nav>
 
     <div class="container text-center">
-      <div>
-        <h1>Registro de Produtos</h1>
-
+        <div>
+          <h1 th:if="${produto.id == null}">Registro de Produtos</h1>
+          <h1 th:unless="${produto.id == null}">Editar Produtos</h1>
+        </div>
         <form th:action="@{/produtos/guardar}" th:object="${produto}" method="post" style="max-width: 600px; margin:0 auto;">
           <div class="m-3">
             
+            <!-- OBS. Para editar vai ser preciso adicionar na tela o ID, pq se não tiver o ID o Spring ao injetar o objeto na tela irá salvar um novo objeto produto, ao invés de atualizar -->
+            <div class="form-group row" th:if="${produto.id != null}">
+              <label class="col-form-label col-sm-4" for="idProduto">ID</label>
+              <div class="col-sm-8">
+                <input type="text" th:field="*{id}" class="form-control" required>
+              </div>
+            </div>
+
             <div class="form-group row">
               <label class="col-form-label col-sm-4" for="nomeProduto">Nome</label>
               <div class="col-sm-8">
@@ -76,7 +85,6 @@
 
           </div>
         </form>
-      </div>
     </div>
   </body>
 </html>
