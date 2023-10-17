@@ -59,7 +59,7 @@ public class ProdutoController {
         model.addAttribute("produto", produto);
         
       /*  Ou pode fazer assim:
-      
+
         Optional<Produto> produto = produtoRepository.findById(id);
         model.addAttribute("produto", produto.get());
         */ 
@@ -69,6 +69,13 @@ public class ProdutoController {
         model.addAttribute("listaCategorias", listaCategorias);
 
         return "produto_formulario";
+    }
+
+    @GetMapping("/produtos/deletar/{id}")
+    public String deletarProduto(@PathVariable("id") Integer id, Model model){
+        
+        produtoRepository.deleteById(id);
+        return "redirect:/produtos";
     }
     
 }
