@@ -39,5 +39,13 @@ public class MarcaController {
     marcaRepository.save(marca);
     return "redirect:/";
   }
+
+  // http://localhost:8080/marcas
+  @GetMapping("/marcas")
+  public String listaMarcas(Model model){
+    List<Marca> listaMarcas = marcaRepository.findAll();
+    model.addAttribute("listaMarcas", listaMarcas);
+    return "/marcas";
+  }
     
 }

@@ -16,6 +16,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter  // geram automaticamente métodos getters
@@ -49,4 +50,10 @@ public class Categoria {
         this.nome = nome;
         this.marca = marca;
     }
+
+    @Override
+    public String toString() {
+        return nome;
+    }
+
 }
