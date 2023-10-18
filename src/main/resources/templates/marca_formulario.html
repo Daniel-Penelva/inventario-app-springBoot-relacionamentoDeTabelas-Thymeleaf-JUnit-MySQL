@@ -65,7 +65,7 @@
                 <label class="col-form-label col-sm-4" for="precoProduto">Selecione uma ou mais categorias: </label>
                 <div class="col-sm-8">
                     <!-- th:field="*{categorias}" Corresponde ao nome do atributo na classe Marca -->
-                    <select th:field="*{categorias}" class="form-control" required>
+                    <select th:field="*{categorias}" multiple="multiple" class="form-control" required>
                         <th:block th:each="categoria : ${listaCategorias}">
                             <option th:text="${categoria.nome}" th:value="${categoria.id}"></option>
                         </th:block>

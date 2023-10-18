@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.sistema.inventarioapp.categoria.Categoria;
 import com.sistema.inventarioapp.categoria.CategoriaRepository;
@@ -29,6 +30,14 @@ public class MarcaController {
         model.addAttribute("marca", new Marca());
 
         return "marca_formulario";
+  }
+
+
+  @PostMapping("/marcas/guardar")
+  public String criarMarca(Marca marca){
+    
+    marcaRepository.save(marca);
+    return "redirect:/";
   }
     
 }
