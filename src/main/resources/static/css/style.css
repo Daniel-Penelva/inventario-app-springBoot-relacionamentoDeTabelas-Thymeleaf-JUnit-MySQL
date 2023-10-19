@@ -1,0 +1,35 @@
+body {
+  background-color: #f3f4e5;
+}
+
+.container {
+  margin: 3px, 3px, 3px, 3px;
+}
+.box {
+  flex: 1;
+  padding: 20px;
+  border: 1px solid #000;
+  background-color: #dad5b7;
+  color: #000;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.box:hover {
+  background-color: #243757; /* Cor mais escura para destacar no hover */
+  color: #fff; /* Mantém o texto branco no hover */
+}
+
+.box:nth-child(even) {
+  background-color: #c2b79b;
+  color: #000;
+}
+
+.box:nth-child(even):hover {
+  background-color: #243757; /* Cor mais escura para destacar no hover */
+  color: #fff; /* Mantém o texto branco no hover */
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}

@@ -12,6 +12,8 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
+    
+    <link rel="stylesheet" type="text/css" href="\css\style.css">
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -39,25 +41,25 @@
     </nav>
 
     <div class="container text-center">
-      <div>
+      <div class="p-2">
         <h1>Bem Vindo a aplicação de inventário</h1>
       </div>
-      <div class="p-2">
+      <div class="box">
         <a th:href="@{/categorias}" class="h2">Lista de categorias</a>
       </div>
-      <div class="p-2">
+      <div class="box">
         <a th:href="@{/categorias/novo}" class="h2">Adicionar categoria</a>
       </div>
-      <div class="p-2">
+      <div class="box">
         <a th:href="@{/produtos}" class="h2">Lista de produtos</a>
       </div>
-      <div class="p-2">
+      <div class="box">
         <a th:href="@{/produtos/novo}" class="h2">Adicionar produto</a>
       </div>
-      <div class="p-2">
+      <div class="box">
         <a th:href="@{/marcas}" class="h2">Lista de marcas</a>
       </div>
-      <div class="p-2">
+      <div class="box">
         <a th:href="@{/marcas/novo}" class="h2">Adicionar marca</a>
       </div>
     </div>
