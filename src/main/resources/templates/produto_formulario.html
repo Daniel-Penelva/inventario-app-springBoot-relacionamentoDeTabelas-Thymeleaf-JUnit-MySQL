@@ -80,7 +80,7 @@
                 </div>
             </div>
 
-            <!-- Para carregar os produtos detalhes -->
+            <!-- Para carregar os produtos detalhes quando for atualizar -->
             <!-- List<ProdutoDetalhes> produtoDetalhes = new ArrayList<>(); da classe Produto -->
             <th:block th:unless="${produto.id == null}" th:each="detalhe, status : ${produto.produtoDetalhes}">
               <!-- request.getParameterValues("detalhesIds"); do ProdutoController -->
@@ -89,12 +89,12 @@
               <div class="form-group row">
                 <label class="col-form-label col-sm-4">Detalhes #[[${status.count}]] : </label>
 
-                <div class="col-sm-8">
+                <div class="col-sm-8" style="margin-top: 5px;">
                   <!-- request.getParameterValues("detalhesNomes"); do ProdutoController -->
                   <input type="text" name="detalhesNomes" th:value="${detalhe.nome}" class="form-control" required>
                 </div>
 
-                <div class="col-sm-8">
+                <div class="col-sm-8" style="margin-left: 33%;">
                   <!-- request.getParameterValues("detalhesValores"); do ProdutoController -->
                   <input type="text" name="detalhesValores" th:value="${detalhe.valor}" class="form-control" required>
                 </div>
