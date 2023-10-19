@@ -3,6 +3,8 @@ package com.sistema.inventarioapp.produto;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,8 +37,20 @@ public class ProdutoController {
     }
 
     @PostMapping("/produtos/guardar")
-    public String criarProduto(Produto produto){
+    public String criarProduto(Produto produto, HttpServletRequest request){
 
+        String[] detalhesIds = request.getParameterValues("detalhesIds");
+        String[] detalhesNomes = request.getParameterValues("detalhesNomes");
+        String[] detalhesValores = request.getParameterValues("detalhesValores");
+
+        for(int i=0; i< detalhesNomes.length; i++){
+            if(detalhesIds != null && detalhesIds.length > 0){
+                produto.carregarDetalhes(Integer.valueOf(detalhesIds[i]), detalhesNomes[i], detalhesValores[i]);
+            }else{
+                produto.adicionarDetalhes(detalhesNomes[i], detalhesValores[i]);
+            }
+        }
+        
         produtoRepository.save(produto); 
         return "redirect:/";
     }

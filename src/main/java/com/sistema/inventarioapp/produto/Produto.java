@@ -1,5 +1,9 @@
 package com.sistema.inventarioapp.produto;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -7,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.sistema.inventarioapp.categoria.Categoria;
 
@@ -38,6 +43,9 @@ public class Produto {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
+    private List<ProdutoDetalhes> produtoDetalhes = new ArrayList<>();
+ 
 
     public Produto(String nome, float preco, Categoria categoria) {
         this.nome = nome;
@@ -49,4 +57,18 @@ public class Produto {
     public Produto(String nome) {
         this.nome = nome;
     }
+
+    // Adicionar produtos detalhes para um array
+    public void adicionarDetalhes(String nome, String valor){
+        this.produtoDetalhes.add(new ProdutoDetalhes(nome, valor, this));
+
+        // OBS. O 'this' é o produto. Como está definido no Construtor ProdutoDetalhes().
+    }
+
+    // Carregar produtos detalhes para um array
+    public void carregarDetalhes(Integer id, String nome, String valor){
+        this.produtoDetalhes.add(new ProdutoDetalhes(id, nome, valor, this));
+    }
+
+
 }
