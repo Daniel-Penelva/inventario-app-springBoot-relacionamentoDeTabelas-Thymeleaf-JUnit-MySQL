@@ -50,6 +50,7 @@
               <th scope="col">ID</th>
               <th scope="col">Nome</th>
               <th scope="col">Categoria</th>
+              <th scope="col">Editar</th>
             </tr>
           </thead>
           <tbody>
@@ -58,6 +59,7 @@
               <td th:text="${marca.id}"></td>
               <td th:text="${marca.nome}"></td>
               <td th:text="${marca.categorias}"></td>
+              <td><a th:href="@{'/marcas/editar'+'/'+${marca.id}}" class="btn btn-info">Editar</a></td>
             </tr>
           </tbody>
         </table>

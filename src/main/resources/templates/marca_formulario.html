@@ -46,13 +46,8 @@
         <form th:action="@{/marcas/guardar}" th:object="${marca}" method="post" style="max-width: 600px; margin:0 auto;">
           <div class="m-3">
             
-            <!-- OBS. Para editar vai ser preciso adicionar na tela o ID, pq se não tiver o ID o Spring ao injetar o objeto na tela irá salvar um novo objeto produto, ao invés de atualizar -->
-            <div class="form-group row" th:if="${marca.id != null}">
-              <label class="col-form-label col-sm-4" for="idMarca">ID</label>
-              <div class="col-sm-8">
-                <input type="text" th:field="*{id}" class="form-control" required>
-              </div>
-            </div>
+            <!-- OBS. Para editar vai ser preciso adicionar na tela o ID,utilizando o hidden para que o campo id não apareça na tela.  -->
+            <input type="hidden" th:field="*{id}" class="form-control" required>
 
             <div class="form-group row">
               <label class="col-form-label col-sm-4" for="nomeMarca">Nome</label>

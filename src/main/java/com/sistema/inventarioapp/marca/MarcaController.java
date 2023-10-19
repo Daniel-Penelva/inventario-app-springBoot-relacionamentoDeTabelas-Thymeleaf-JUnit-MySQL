@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.sistema.inventarioapp.categoria.Categoria;
@@ -46,6 +47,18 @@ public class MarcaController {
     List<Marca> listaMarcas = marcaRepository.findAll();
     model.addAttribute("listaMarcas", listaMarcas);
     return "/marcas";
+  }
+
+  @GetMapping("/marcas/editar/{id}")
+    public String mostrarFormularioEditarMarca(@PathVariable("id") Integer id, Model model){
+
+        List<Categoria> listaCategorias = categoriaRepository.findAll();
+        Marca marca = marcaRepository.findById(id).get();
+        
+        model.addAttribute("listaCategorias", listaCategorias);
+        model.addAttribute("marca", marca);
+    
+        return "marca_formulario";
   }
     
 }
