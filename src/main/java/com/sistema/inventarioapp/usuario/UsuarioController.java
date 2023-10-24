@@ -13,6 +13,10 @@ public class UsuarioController {
     @Autowired
     UsuarioRepository usuarioReository;
 
+    @Autowired
+    RolRepository rolReository;
+
+
     @GetMapping("/usuarios")
     public String listarUsuarios(Model model) {
 
@@ -21,6 +25,16 @@ public class UsuarioController {
         model.addAttribute("listaUsuarios", listaUsuarios);
 
         return "usuarios";
+    }
+
+    @GetMapping("/usuarios/novo")
+    public String mostarFormularioRegistroDeUsuarios(Model model) {
+
+        List<Rol> listaRoles = rolReository.findAll();
+        model.addAttribute("listaRoles", listaRoles);
+        model.addAttribute("usuario", new Usuario());
+        
+        return "usuario_formulario";
     }
 
 }
