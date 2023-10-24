@@ -41,11 +41,17 @@
 
     <div class="container text-center">
       <div>
-        <h1>Registro de Usuários</h1>
+        <div>
+          <h1 th:if="${usuario.id == null}">Registro de Usuários</h1>
+          <h1 th:unless="${usuario.id == null}">Editar Usuários</h1>
+        </div>
 
         <form th:action="@{/usuarios/guardar}" th:object="${usuario}" method="post" style="max-width: 600px; margin:0 auto;">
           <div class="m-3">
             
+            <!-- OBS. Para editar vai ser preciso adicionar na tela o ID,utilizando o hidden para que o campo id não apareça na tela.  -->
+            <input type="hidden" th:field="*{id}" class="form-control" required>
+
             <div class="form-group row">
               <label class="col-form-label col-sm-4" for="emailUsuario">Email: </label>
               <div class="col-sm-8">
