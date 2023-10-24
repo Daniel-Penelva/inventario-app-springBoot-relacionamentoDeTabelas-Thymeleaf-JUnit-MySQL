@@ -57,4 +57,11 @@ public class UsuarioController {
 
         return "usuario_formulario";
     }
+
+    @GetMapping("/usuarios/deletar/{id}")
+    public String deletarUsuario(@PathVariable("id") Integer id, Model model){
+        
+        usuarioReository.deleteById(id);
+        return "redirect:/usuarios";
+    }
 }
