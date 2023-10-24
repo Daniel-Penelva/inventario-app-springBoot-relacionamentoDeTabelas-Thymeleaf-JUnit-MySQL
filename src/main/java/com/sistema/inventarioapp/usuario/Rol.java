@@ -27,6 +27,10 @@ public class Rol {
     @Column(length = 25, nullable = false, unique = true)
     private String nome;
 
+    public Rol(Integer id) {
+        this.id = id;
+    }
+
     public Rol(String nome) {
         this.nome = nome;
     }

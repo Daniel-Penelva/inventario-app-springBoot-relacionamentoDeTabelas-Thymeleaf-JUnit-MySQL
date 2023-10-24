@@ -61,3 +61,286 @@ Portanto, `@AutoConfigureTestDatabase` define como o banco de dados é configura
    - `.isGreaterThan(0)` verifica se o ID é maior do que zero.
 
 Em resumo, este teste verifica se é possível criar uma instância da classe `Categoria`, salvá-la em um repositório JPA e garantir que o ID atribuído à categoria seja maior que zero, o que indica que a categoria foi persistida com sucesso no banco de dados. Esse teste é útil para verificar o funcionamento da criação de categorias no contexto de um aplicativo que utiliza o Spring Data JPA e um repositório JPA chamado `categoriaRepository`. 
+
+# Classe de Teste unitário UsuarioRepositoryTest
+
+## Teste unitário -  método testCriarRoles()
+
+Este método de teste cria três objetos da classe `Rol` (que  representa cargos de usuário, como "Administrador", "Editor" e "Visitante") e os persiste em um contexto de persistência JPA usando o objeto `entityManager`. 
+
+```java
+    @Test
+    public void testCriarRoles(){
+        Rol rolAdmin = new Rol("Administrador");
+        Rol rolEditor = new Rol("Editor");
+        Rol rolVisitante = new Rol("Visitante");
+
+        entityManager.persist(rolAdmin);
+        entityManager.persist(rolEditor);
+        entityManager.persist(rolVisitante);
+    }
+```
+
+Explicando o código passo a passo:
+
+1. `@Test`:
+   - Esta é uma anotação do JUnit que marca um método como um método de teste. Os métodos marcados com `@Test` são executados quando executa os testes unitários.
+
+2. `public void testCriarRoles()`:
+   - Este é o método de teste em si. Ele é público, não retorna nenhum valor e tem um nome descritivo. O nome do método começa com "test", o que é uma convenção para indicar que é um método de teste.
+
+3. Criação de Objetos:
+   - Neste trecho, três objetos da classe `Rol` são criados: `rolAdmin`, `rolEditor` e `rolVisitante`. Cada objeto representa um cargo de usuário com um nome específico.
+
+4. Persistência no Banco de Dados:
+   - Os objetos `rolAdmin`, `rolEditor` e `rolVisitante` são persistidos no banco de dados usando o método `persist` do `entityManager`. O `entityManager` é uma parte da API JPA que permite interagir com o banco de dados. Isso significa que os objetos são armazenados no banco de dados como registros reais. Portanto, após a execução deste teste, vai ter três registros no banco de dados representando os cargos "Administrador", "Editor" e "Visitante".
+
+Este teste é usado para verificar se a criação e persistência de cargos de usuário no banco de dados estão funcionando corretamente. 
+
+## Teste unitário -  método testCriarNovoUsuarioComUmRol()
+
+Este teste unitário criar um novo usuário com um papel (ou "rol") e persisti em um contexto de persistência JPA. 
+
+```java
+    @Test
+    public void testCriarNovoUsuarioComUmRol(){
+        Rol rolAdmin = entityManager.find(Rol.class, 1);
+        Usuario usuario = new Usuario("d4n.andrade@gmail.com", "123");
+
+        usuario.adicionarRol(rolAdmin);
+
+        usuarioRepository.save(usuario);
+    }
+
+```
+
+Explicando o código passo a passo:
+
+1. `@Test`:
+   - Esta é uma anotação do JUnit que marca um método como um método de teste. Os métodos marcados com `@Test` são executados quando executa os testes unitários.
+
+2. `public void testCriarNovoUsuarioComUmRol()`:
+   - Este é o método de teste em si. Ele é público, não retorna nenhum valor e tem um nome descritivo. O nome do método começa com "test", o que é uma convenção para indicar que é um método de teste.
+
+3. `Rol rolAdmin = entityManager.find(Rol.class, 1);`:
+   - Neste trecho, o método `find` do `entityManager` é usado para buscar um objeto da classe `Rol` no banco de dados com um ID específico (1, neste caso). Logo isso pressupõe que existe um registro na tabela de roles com o ID 1 representando o papel "Administrador". O objeto `rolAdmin` contém esse papel encontrado no banco de dados.
+
+4. Criação de um Objeto de Usuário:
+   - Em seguida, é criado um objeto da classe `Usuario` com um email ("d4n.andrade@gmail.com") e uma senha ("123"). Este objeto representa um novo usuário.
+
+5. `usuario.adicionarRol(rolAdmin);`:
+   - O método `adicionarRol(rolAdmin)` é chamado no objeto `usuario`. Este método associa o papel `rolAdmin` ao usuário, indicando que o usuário possui o papel de "Administrador".
+
+6. `usuarioRepository.save(usuario);`:
+   - O objeto de usuário é persistido no banco de dados usando o repositório `usuarioRepository`. Isso significa que um registro de usuário será criado no banco de dados com o email, senha e papel associado.
+
+Este teste é usado para verificar se a criação de um novo usuário e a associação de um papel a ele funcionam corretamente.
+
+## Teste unitário -  método testCriarNovoUsuarioComDoisRoles()
+
+Este método de teste cria um novo usuário e associa dois papéis (ou "roles") a esse usuário, e então persiste o usuário no contexto de persistência JPA.
+
+```java
+    @Test
+    public void testCriarNovoUsuarioComDoisRoles(){
+        Rol rolEditor = entityManager.find(Rol.class, 2);
+        Rol rolVisitante = entityManager.find(Rol.class, 3);
+        
+        Usuario usuario = new Usuario("biana@gmail.com", "123");
+        
+        usuario.adicionarRol(rolEditor);
+        usuario.adicionarRol(rolVisitante);
+
+        usuarioRepository.save(usuario);
+    }
+```
+
+Explicando o código passo a passo:
+
+1. `@Test`:
+   - Esta é uma anotação do JUnit que marca um método como um método de teste. Os métodos marcados com `@Test` são executados quando executa os testes unitários.
+
+2. `public void testCriarNovoUsuarioComDoisRoles()`:
+   - Este é o método de teste em si. Ele é público, não retorna nenhum valor e tem um nome descritivo. O nome do método começa com "test", o que é uma convenção para indicar que é um método de teste.
+
+3. `Rol rolEditor = entityManager.find(Rol.class, 2);` e `Rol rolVisitante = entityManager.find(Rol.class, 3);`:
+   - Nesses trechos, os métodos `find` do `entityManager` são usados para buscar objetos da classe `Rol` no banco de dados com IDs específicos (2 e 3, neste caso). Isso pressupõe que existem registros na tabela de roles com esses IDs representando os papéis "Editor" e "Visitante". Os objetos `rolEditor` e `rolVisitante` contêm esses papéis encontrados no banco de dados.
+
+4. Criação de um Objeto de Usuário:
+   - Em seguida, é criado um objeto da classe `Usuario` com um email ("biana@gmail.com") e uma senha ("123"). Este objeto representa um novo usuário.
+
+5. `usuario.adicionarRol(rolEditor);` e `usuario.adicionarRol(rolVisitante);`:
+   - Dois métodos `adicionarRol()` são chamados no objeto `usuario`. Esses métodos associam os papéis `rolEditor` e `rolVisitante` ao usuário, indicando que o usuário possui esses dois papéis.
+
+6. `usuarioRepository.save(usuario);`:
+   - O objeto de usuário, que agora possui os dois papéis associados, é persistido no banco de dados usando o repositório `usuarioRepository`. Isso significa que um registro de usuário será criado no banco de dados com o email, senha e os dois papéis associados.
+
+Este teste é usado para verificar se a criação de um novo usuário com a associação de múltiplos papéis funciona corretamente. 
+
+## Teste unitário -  método testAtribuirRolUsuarioExistente()
+
+Este método de teste tem como objetivo atribuir um novo papel (ou "rol") a um usuário existente no sistema.
+
+```java
+    @Test
+    public void testAtribuirRolUsuarioExistente(){
+        
+        Usuario usuario = usuarioRepository.findById(1).get();
+
+        Rol rolEditor = entityManager.find(Rol.class, 2);
+        
+        usuario.adicionarRol(rolEditor);
+    }
+```
+
+Explicando o código passo a passo:
+
+1. `@Test`:
+   - Esta é uma anotação do JUnit que marca um método como um método de teste. Os métodos marcados com `@Test` são executados quando executa os testes unitários.
+
+2. `public void testAtribuirRolUsuarioExistente()`:
+   - Este é o método de teste em si. Ele é público, não retorna nenhum valor e tem um nome descritivo. O nome do método começa com "test", o que é uma convenção para indicar que é um método de teste.
+
+3. `Usuario usuario = usuarioRepository.findById(1).get();`:
+   - Neste trecho, o método `findById(1)` do repositório `usuarioRepository` é usado para buscar um usuário no banco de dados com um ID específico (1, neste caso). O método `.get()` é usado para obter o objeto `Usuario` do `Optional<Usuario>` retornado pelo `findById`. Isso significa que o usuário com ID 1 é recuperado do banco de dados e armazenado na variável `usuario`.
+
+4. `Rol rolEditor = entityManager.find(Rol.class, 2);`:
+   - Neste trecho, o método `find` do `entityManager` é usado para buscar um objeto da classe `Rol` no banco de dados com um ID específico (2, neste caso). Isso pressupõe que existe um registro na tabela de roles com o ID 2 representando o papel "Editor". O objeto `rolEditor` contém esse papel encontrado no banco de dados.
+
+5. `usuario.adicionarRol(rolEditor);`:
+   - O método `adicionarRol(rolEditor)` é chamado no objeto `usuario`. Este método associa o papel `rolEditor` ao usuário existente, indicando que o usuário agora possui o papel de "Editor".
+
+Este teste é usado para verificar se a atribuição de papéis a um usuário existente funciona corretamente. 
+
+## Teste unitário -  método testDeletarRolUsuarioExistente()
+
+Este método de teste tem como objetivo deletar um papel (ou "rol") de um usuário existente no sistema.
+
+```java
+    @Test
+    public void testDeletarRolUsuarioExistente() {
+
+        Usuario usuario = usuarioRepository.findById(1).get();
+
+        Rol rol = new Rol(2);
+
+        usuario.deletarRol(rol);
+    }
+```
+
+Explicando o código passo a passo:
+
+1. `@Test`:
+   - Esta é uma anotação do JUnit que marca um método como um método de teste. Os métodos marcados com `@Test` são executados quando executa os testes unitários.
+
+2. `public void testDeletarRolUsuarioExistente()`:
+   - Este é o método de teste em si. Ele é público, não retorna nenhum valor e tem um nome descritivo. O nome do método começa com "test", o que é uma convenção para indicar que é um método de teste.
+
+3. `Usuario usuario = usuarioRepository.findById(1).get();`:
+   - Neste trecho, o método `findById(1)` do repositório `usuarioRepository` é usado para buscar um usuário no banco de dados com um ID específico (1, neste caso). O método `.get()` é usado para obter o objeto `Usuario` do `Optional<Usuario>` retornado pelo `findById`. Isso significa que o usuário com ID 1 é recuperado do banco de dados e armazenado na variável `usuario`.
+
+4. `Rol rol = new Rol(2);`:
+   - Aqui, é criado um objeto da classe `Rol` com um ID específico (2) que representa o papel que deseja deletar o usuário.
+
+5. `usuario.deletarRol(rol);`:
+   - O método `deletarRol(rol)` é chamado no objeto `usuario`. Este método remove o papel `rol` do usuário, indicando que o usuário não possui mais esse papel.
+
+Este teste é usado para verificar se a remoção de um papel de um usuário existente funciona corretamente. 
+
+## Teste unitário -  método testCriarNovoUsuarioComNovoRol()
+
+Este método de teste em particular tem como objetivo criar um novo usuário e associar um novo papel (ou "rol") a esse usuário, e, em seguida, persistir o usuário no contexto de persistência JPA. 
+
+```java
+    @Test
+    public void testCriarNovoUsuarioComNovoRol() {
+
+        Rol rolVendedor = new Rol("Vendedor");
+        Usuario usuario = new Usuario("paula@gmail.com", "123");
+
+        usuario.adicionarRol(rolVendedor);
+
+        usuarioRepository.save(usuario);
+    }
+```
+
+Explicando o código passo a passo:
+
+1. `@Test`:
+   - Esta é uma anotação do JUnit que marca um método como um método de teste. Os métodos marcados com `@Test` são executados quando executa os testes unitários.
+
+2. `public void testCriarNovoUsuarioComNovoRol()`:
+   - Este é o método de teste em si. Ele é público, não retorna nenhum valor e tem um nome descritivo. O nome do método começa com "test", o que é uma convenção para indicar que é um método de teste.
+
+3. `Rol rolVendedor = new Rol("Vendedor");`:
+   - Nesse trecho, um novo objeto da classe `Rol` é criado com um nome específico ("Vendedor"). Isso representa um novo papel que deseja associar ao usuário.
+
+4. Criação de um Objeto de Usuário:
+   - Em seguida, é criado um objeto da classe `Usuario` com um email ("paula@gmail.com") e uma senha ("123"). Este objeto representa um novo usuário.
+
+5. `usuario.adicionarRol(rolVendedor);`:
+   - O método `adicionarRol(rolVendedor)` é chamado no objeto `usuario`. Este método associa o papel `rolVendedor` ao usuário, indicando que o usuário possui esse novo papel.
+
+6. `usuarioRepository.save(usuario);`:
+   - O objeto de usuário, que agora possui o novo papel associado, é persistido no banco de dados usando o repositório `usuarioRepository`. Isso significa que um registro de usuário será criado no banco de dados com o email, senha e o novo papel associado.
+
+Este teste é usado para verificar se a criação de um novo usuário com a associação de um novo papel funciona corretamente. 
+
+## Teste unitário -  método testBuscarUsuario()
+Este método de teste tem como objetivo buscar um usuário no banco de dados, desassociá-lo do contexto de persistência e, em seguida, imprimir informações sobre o usuário, como o email e os papéis associados. 
+
+```java
+    @Test
+    public void testBuscarUsuario() {
+
+        Usuario usuario = usuarioRepository.findById(1).get();
+
+        entityManager.detach(usuario);
+
+        System.out.println("Usuario: " + usuario.getEmail() + " - Rol: " + usuario.getRoles());
+    }
+```
+
+Explicando o código passo a passo:
+
+1. `@Test`:
+   - Esta é uma anotação do JUnit que marca um método como um método de teste. Os métodos marcados com `@Test` são executados quando executa os testes unitários.
+
+2. `public void testBuscarUsuario()`:
+   - Este é o método de teste em si. Ele é público, não retorna nenhum valor e tem um nome descritivo. O nome do método começa com "test", o que é uma convenção para indicar que é um método de teste.
+
+3. `Usuario usuario = usuarioRepository.findById(1).get();`:
+   - Neste trecho, o método `findById(1)` do repositório `usuarioRepository` é usado para buscar um usuário no banco de dados com um ID específico (1, neste caso). O método `.get()` é usado para obter o objeto `Usuario` do `Optional<Usuario>` retornado pelo `findById`. Isso significa que o usuário com ID 1 é recuperado do banco de dados e armazenado na variável `usuario`.
+
+4. `entityManager.detach(usuario);`:
+   - O método `detach(usuario)` é chamado no objeto `usuario`. O `entityManager` é uma parte da API JPA que gerencia o ciclo de vida das entidades persistidas. Ao chamar `detach`, está desassociando a entidade do contexto de persistência, o que significa que ela não está mais sendo gerenciada pela JPA. Isso é útil quando deseja recuperar uma entidade do banco de dados e, em seguida, continuar a usá-la sem que as alterações sejam automaticamente sincronizadas com o banco de dados.
+
+5. `System.out.println("Usuario: " + usuario.getEmail() + " - Rol: " + usuario.getRoles());`:
+   - Aqui, o código imprime informações sobre o usuário, como o email e os papéis associados, usando a função `System.out.println()`.
+
+Este teste é usado para verificar a capacidade de buscar um usuário no banco de dados, desassociá-lo do contexto de persistência e acessar informações sobre ele. Essa é uma operação útil em situações em que deseja recuperar uma entidade do banco de dados, mas não deseja que as alterações feitas nessa entidade sejam automaticamente sincronizadas com o banco de dados. ]
+
+## Teste unitário -  método testDeletarRolUsuarioExistente()
+
+Esse método de teste tem como objetivo excluir um usuário do banco de dados com base no seu ID. 
+
+```java
+    @Test
+    public void testDeletarUsuario() {
+
+        usuarioRepository.deleteById(2);
+    }
+```
+
+Explicando o código passo a passo:
+
+1. `@Test`:
+   - Esta é uma anotação do JUnit que marca um método como um método de teste. Os métodos marcados com `@Test` são executados quando executa os testes unitários.
+
+2. `public void testDeletarUsuario()`:
+   - Este é o método de teste em si. Ele é público, não retorna nenhum valor e tem um nome descritivo. O nome do método começa com "test", o que é uma convenção para indicar que é um método de teste.
+
+3. `usuarioRepository.deleteById(2);`:
+   - Neste trecho, o método `deleteById(2)` é chamado no repositório `usuarioRepository`. Esse método exclui o registro de um usuário com o ID 2 do banco de dados.
+
+Portanto, este teste é usado para verificar se a operação de exclusão de um usuário com um ID específico está funcionando corretamente. O usuário com ID 2 será excluído do banco de dados quando esse teste for executado.
