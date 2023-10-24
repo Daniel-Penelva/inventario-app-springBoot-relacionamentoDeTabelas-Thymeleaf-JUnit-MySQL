@@ -12,7 +12,6 @@
       integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
       crossorigin="anonymous"
     />
-    
     <link rel="stylesheet" type="text/css" href="\css\style.css">
   </head>
   <body>
@@ -41,33 +40,31 @@
     </nav>
 
     <div class="container text-center">
-      <div class="p-2">
-        <h1>Bem Vindo a aplicação de inventário</h1>
+      <div>
+        <h1>Lista de Usuários</h1>
       </div>
-      <div class="box">
-        <a th:href="@{/categorias}" class="h2">Lista de categorias</a>
-      </div>
-      <div class="box">
-        <a th:href="@{/categorias/novo}" class="h2">Adicionar categoria</a>
-      </div>
-      <div class="box">
-        <a th:href="@{/produtos}" class="h2">Lista de produtos</a>
-      </div>
-      <div class="box">
-        <a th:href="@{/produtos/novo}" class="h2">Adicionar produto</a>
-      </div>
-      <div class="box">
-        <a th:href="@{/marcas}" class="h2">Lista de marcas</a>
-      </div>
-      <div class="box">
-        <a th:href="@{/marcas/novo}" class="h2">Adicionar marca</a>
-      </div>
-      <div class="box">
-        <a th:href="@{/usuarios}" class="h2">Lista de Usuários</a>
-      </div>
-      <div class="box">
-        <a th:href="@{/usuarios/novo}" class="h2">Adicionar Usuário</a>
+      <br />
+      <div>
+        <table class="table table-striped table-bordered table-hover">
+          <thead class="table-dark">
+            <tr>
+              <th scope="col">ID</th>
+              <th scope="col">Email</th>
+              <th scope="col">Roles</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr th:each="usuario : ${listaUsuarios}">
+              <td th:text="${usuario.id}"></td>
+              <td th:text="${usuario.email}"></td>
+              <td th:text="${usuario.roles}"></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
+
+    <!-- CDN Bootstrap Javascript -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   </body>
 </html>
