@@ -344,3 +344,43 @@ Explicando o código passo a passo:
    - Neste trecho, o método `deleteById(2)` é chamado no repositório `usuarioRepository`. Esse método exclui o registro de um usuário com o ID 2 do banco de dados.
 
 Portanto, este teste é usado para verificar se a operação de exclusão de um usuário com um ID específico está funcionando corretamente. O usuário com ID 2 será excluído do banco de dados quando esse teste for executado.
+
+# Classe de Teste unitário ItemCarrinhoRepositoryTest
+
+## Teste unitário -  método testAdicionarItem()
+
+Esse método de teste tem como objetivo adicionar um item ao carrinho de compras de um usuário no contexto de um sistema de compras online. 
+
+```java
+    @Test
+    public void testAdicionarItem(){
+        Produto produto = testEntityManager.find(Produto.class, 5);
+
+        Usuario usuario = testEntityManager.find(Usuario.class, 5);
+
+        ItemCarrinho itemCarrinho = new ItemCarrinho(1, produto, usuario);
+        itemCarrinhoRepository.save(itemCarrinho);
+    }
+```
+
+Explicando o código passo a passo:
+
+1. `@Test`:
+   - Esta é uma anotação do JUnit que marca um método como um método de teste. Os métodos marcados com `@Test` são executados quando executa os testes unitários.
+
+2. `public void testAdicionarItem()`:
+   - Este é o método de teste em si. Ele é público, não retorna nenhum valor e tem um nome descritivo. O nome do método começa com "test", o que é uma convenção para indicar que é um método de teste.
+
+3. `Produto produto = testEntityManager.find(Produto.class, 2);`:
+   - Nesse trecho, o método `find(Produto.class, 2)` é chamado no `testEntityManager` para buscar um objeto da classe `Produto` no banco de dados com um ID específico (2, neste caso). Isso pressupõe que existe um registro na tabela de produtos com o ID 2 representando o produto que deseja adicionar ao carrinho. O objeto `produto` contém as informações do produto encontrado no banco de dados.
+
+4. `Usuario usuario = testEntityManager.find(Usuario.class, 1);`:
+   - Da mesma forma, o método `find(Usuario.class, 1)` é chamado no `testEntityManager` para buscar um objeto da classe `Usuario` no banco de dados com um ID específico (1, neste caso). Isso pressupõe que existe um registro na tabela de usuários com o ID 1 representando o usuário para o qual deseja adicionar o item ao carrinho. O objeto `usuario` contém as informações do usuário encontrado no banco de dados.
+
+5. Criação de um Objeto de Item de Carrinho:
+   - Em seguida, é criado um objeto da classe `ItemCarrinho` com uma quantidade (2 unidades), o objeto `produto` (produto a ser adicionado) e o objeto `usuario` (usuário dono do carrinho).
+
+6. `itemCarrinhoRepository.save(itemCarrinho);`:
+   - O objeto de item de carrinho, que representa o produto adicionado ao carrinho, é persistido no banco de dados usando o repositório `itemCarrinhoRepository`. Isso significa que um registro do item de carrinho será criado no banco de dados, associado ao usuário e ao produto, indicando que o usuário possui 2 unidades desse produto em seu carrinho.
+
+Este teste é usado para verificar se a operação de adicionar um item ao carrinho de compras de um usuário está funcionando corretamente. 
