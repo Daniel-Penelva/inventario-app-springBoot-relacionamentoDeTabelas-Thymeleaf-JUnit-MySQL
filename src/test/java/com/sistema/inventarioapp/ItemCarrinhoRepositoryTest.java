@@ -68,4 +68,10 @@ public class ItemCarrinhoRepositoryTest {
 
         itemCarrinhoRepository.save(itemCarrinho);
     }
+
+    @Test
+    public void testDeletarItem(){
+
+        itemCarrinhoRepository.deleteById(3);
+    }
 }

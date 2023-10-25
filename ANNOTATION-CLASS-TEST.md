@@ -491,3 +491,28 @@ Explicando o código passo a passo:
 Se parte `itemCarrinhoRepository.save(itemCarrinho);` persisti as alterações no banco de dados.
 
 Portanto, este teste demonstra a atualização de um item de carrinho.
+
+## Teste unitário -  método testDeletarItem()
+
+Esse método de teste tem como objetivo excluir um item do carrinho de compras do banco de dados com base no seu ID.
+
+```java
+    @Test
+    public void testDeletarItem(){
+
+        itemCarrinhoRepository.deleteById(3);
+    }
+```
+
+Explicando o código passo a passo:
+
+1. `@Test`:
+   - Esta é uma anotação do JUnit que marca um método como um método de teste. Os métodos marcados com `@Test` são executados quando executa os testes unitários.
+
+2. `public void testDeletarItem()`:
+   - Este é o método de teste em si. Ele é público, não retorna nenhum valor e tem um nome descritivo. O nome do método começa com "test", o que é uma convenção para indicar que é um método de teste.
+
+3. `itemCarrinhoRepository.deleteById(3);`:
+   - Neste trecho, o método `deleteById(3)` é chamado no repositório `itemCarrinhoRepository`. Esse método exclui o registro de um item de carrinho com o ID 3 do banco de dados.
+
+Portanto, este teste é usado para verificar se a operação de exclusão de um item de carrinho com um ID específico está funcionando corretamente. O item de carrinho com ID 3 será excluído do banco de dados quando esse teste for executado.
