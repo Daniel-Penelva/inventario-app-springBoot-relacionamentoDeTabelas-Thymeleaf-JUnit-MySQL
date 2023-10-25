@@ -45,7 +45,11 @@ public class Produto {
 
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
     private List<ProdutoDetalhes> produtoDetalhes = new ArrayList<>();
- 
+
+    
+    public Produto(Integer id) {
+        this.id = id;
+    }
 
     public Produto(String nome, float preco, Categoria categoria) {
         this.nome = nome;

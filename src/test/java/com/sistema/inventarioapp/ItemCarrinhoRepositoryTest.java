@@ -1,5 +1,7 @@
 package com.sistema.inventarioapp;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -32,5 +34,21 @@ public class ItemCarrinhoRepositoryTest {
 
         ItemCarrinho itemCarrinho = new ItemCarrinho(1, produto, usuario);
         itemCarrinhoRepository.save(itemCarrinho);
+    }
+
+    @Test
+    public void testAdicionarMuitosItens(){
+        
+        Usuario usuario = new Usuario(1);
+
+        Produto produto1 = new Produto(1);
+        Produto produto2 = new Produto(2);
+        Produto produto3 = new Produto(3);
+
+        ItemCarrinho itemCarrinho1 = new ItemCarrinho(1, produto1, usuario);
+        ItemCarrinho itemCarrinho2 = new ItemCarrinho(3, produto2, usuario);
+        ItemCarrinho itemCarrinho3 = new ItemCarrinho(1, produto3, usuario);
+        
+        itemCarrinhoRepository.saveAll(List.of(itemCarrinho1, itemCarrinho2, itemCarrinho3));
     }
 }

@@ -384,3 +384,29 @@ Explicando o código passo a passo:
    - O objeto de item de carrinho, que representa o produto adicionado ao carrinho, é persistido no banco de dados usando o repositório `itemCarrinhoRepository`. Isso significa que um registro do item de carrinho será criado no banco de dados, associado ao usuário e ao produto, indicando que o usuário possui 2 unidades desse produto em seu carrinho.
 
 Este teste é usado para verificar se a operação de adicionar um item ao carrinho de compras de um usuário está funcionando corretamente. 
+
+## Teste unitário -  método testAdicionarMuitosItens()
+
+Esse método de teste tem como objetivo adicionar vários itens ao carrinho de compras de um usuário no contexto de um sistema de compras online. 
+
+Explicando o código passo a passo:
+
+1. `@Test`:
+   - Esta é uma anotação do JUnit que marca um método como um método de teste. Os métodos marcados com `@Test` são executados quando executa os testes unitários.
+
+2. `public void testAdicionarMuitosItem()`:
+   - Este é o método de teste em si. Ele é público, não retorna nenhum valor e tem um nome descritivo. O nome do método começa com "test", o que é uma convenção para indicar que é um método de teste.
+
+3. `Usuario usuario = new Usuario(1);`:
+   - Nesse trecho, um novo objeto da classe `Usuario` é criado com um ID específico (1). Isso pressupõe que existe um registro na tabela de usuários com o ID 1, representando o usuário para o qual deseja adicionar os itens ao carrinho.
+
+4. Criação de Objetos de Produto:
+   - Em seguida, são criados três objetos da classe `Produto` com IDs específicos (1, 2 e 3). Esses objetos representam os produtos que deseja adicionar ao carrinho.
+
+5. Criação de Objetos de Item de Carrinho:
+   - São criados três objetos da classe `ItemCarrinho`, cada um representando um item a ser adicionado ao carrinho. Cada objeto de `ItemCarrinho` está associado a um produto específico, à quantidade desejada e ao usuário (proprietário do carrinho).
+
+6. `itemCarrinhoRepository.saveAll(List.of(itemCarrinho1, itemCarrinho2, itemCarrinho3));`:
+   - Os objetos de item de carrinho são persistidos no banco de dados usando o método `saveAll()` do repositório `itemCarrinhoRepository`. Isso significa que registros de item de carrinho serão criados no banco de dados para representar os itens adicionados ao carrinho do usuário.
+
+Este teste é usado para verificar se a operação de adicionar vários itens ao carrinho de compras de um usuário está funcionando corretamente. 
