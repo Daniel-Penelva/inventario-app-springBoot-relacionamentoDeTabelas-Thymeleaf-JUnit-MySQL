@@ -387,7 +387,25 @@ Este teste é usado para verificar se a operação de adicionar um item ao carri
 
 ## Teste unitário -  método testAdicionarMuitosItens()
 
-Esse método de teste tem como objetivo adicionar vários itens ao carrinho de compras de um usuário no contexto de um sistema de compras online. 
+Esse método de teste tem como objetivo adicionar vários itens ao carrinho de compras de um usuário no contexto de um sistema de compras online.
+
+```java
+    @Test
+    public void testAdicionarMuitosItens(){
+        
+        Usuario usuario = new Usuario(1);
+
+        Produto produto1 = new Produto(1);
+        Produto produto2 = new Produto(2);
+        Produto produto3 = new Produto(3);
+
+        ItemCarrinho itemCarrinho1 = new ItemCarrinho(1, produto1, usuario);
+        ItemCarrinho itemCarrinho2 = new ItemCarrinho(3, produto2, usuario);
+        ItemCarrinho itemCarrinho3 = new ItemCarrinho(1, produto3, usuario);
+        
+        itemCarrinhoRepository.saveAll(List.of(itemCarrinho1, itemCarrinho2, itemCarrinho3));
+    }
+```
 
 Explicando o código passo a passo:
 
@@ -410,3 +428,32 @@ Explicando o código passo a passo:
    - Os objetos de item de carrinho são persistidos no banco de dados usando o método `saveAll()` do repositório `itemCarrinhoRepository`. Isso significa que registros de item de carrinho serão criados no banco de dados para representar os itens adicionados ao carrinho do usuário.
 
 Este teste é usado para verificar se a operação de adicionar vários itens ao carrinho de compras de um usuário está funcionando corretamente. 
+
+## Teste unitário -  método testListarItens()
+
+Esse método de teste tem como objetivo listar todos os itens de carrinho existentes no banco de dados e imprimir essas informações. 
+
+```java
+    @Test
+    public void testListarItens(){
+        List<ItemCarrinho> itensCarrinho = itemCarrinhoRepository.findAll();
+
+        itensCarrinho.forEach(System.out::println);
+    }
+```
+
+Explicando o código passo a passo:
+
+1. `@Test`:
+   - Esta é uma anotação do JUnit que marca um método como um método de teste. Os métodos marcados com `@Test` são executados quando executa os testes unitários.
+
+2. `public void testListarItens()`:
+   - Este é o método de teste em si. Ele é público, não retorna nenhum valor e tem um nome descritivo. O nome do método começa com "test", o que é uma convenção para indicar que é um método de teste.
+
+3. `List<ItemCarrinho> itensCarrinho = itemCarrinhoRepository.findAll();`:
+   - Neste trecho, o método `findAll()` do repositório `itemCarrinhoRepository` é usado para buscar todos os itens de carrinho existentes no banco de dados. O resultado é uma lista de objetos da classe `ItemCarrinho`, que contém informações sobre os itens no carrinho.
+
+4. `itensCarrinho.forEach(System.out::println);`:
+   - Aqui, o código utiliza um loop `forEach` para iterar sobre a lista de itens de carrinho e imprimir cada item. A expressão `System.out::println` é uma referência a um método que imprime os objetos para a saída padrão.
+
+Este teste é usado para verificar se a operação de listar itens de carrinho do banco de dados está funcionando corretamente. 

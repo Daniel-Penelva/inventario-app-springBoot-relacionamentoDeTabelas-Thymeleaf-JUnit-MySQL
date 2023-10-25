@@ -16,6 +16,7 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "item_carrinho")
@@ -44,5 +45,11 @@ public class ItemCarrinho {
         this.quantidade = quantidade;
         this.produto = produto;
         this.usuario = usuario;
+    }
+
+    @Override
+    public String toString() {
+        return "ItemCarrinho [id=" + id + ", quantidade=" + quantidade + ", produto=" + produto + ", usuario=" + usuario
+                + "]";
     }
 }

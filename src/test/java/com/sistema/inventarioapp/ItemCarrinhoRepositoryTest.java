@@ -51,4 +51,11 @@ public class ItemCarrinhoRepositoryTest {
         
         itemCarrinhoRepository.saveAll(List.of(itemCarrinho1, itemCarrinho2, itemCarrinho3));
     }
+
+    @Test
+    public void testListarItens(){
+        List<ItemCarrinho> itensCarrinho = itemCarrinhoRepository.findAll();
+
+        itensCarrinho.forEach(System.out::println);
+    }
 }

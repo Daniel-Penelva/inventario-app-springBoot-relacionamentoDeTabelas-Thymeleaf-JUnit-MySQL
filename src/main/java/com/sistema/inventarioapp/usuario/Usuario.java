@@ -66,6 +66,11 @@ public class Usuario {
     public void deletarRol(Rol rol){
         this.roles.remove(rol);
     }
+
+    @Override
+    public String toString() {
+        return email;
+    }
 }
 
 /**

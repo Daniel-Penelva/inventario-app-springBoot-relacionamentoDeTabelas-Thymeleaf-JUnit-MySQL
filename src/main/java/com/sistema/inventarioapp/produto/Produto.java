@@ -46,7 +46,7 @@ public class Produto {
     @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL)
     private List<ProdutoDetalhes> produtoDetalhes = new ArrayList<>();
 
-    
+
     public Produto(Integer id) {
         this.id = id;
     }
@@ -74,5 +74,8 @@ public class Produto {
         this.produtoDetalhes.add(new ProdutoDetalhes(id, nome, valor, this));
     }
 
-
+    @Override
+    public String toString() {
+        return nome;
+    }
 }
