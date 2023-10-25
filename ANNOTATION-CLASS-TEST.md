@@ -457,3 +457,37 @@ Explicando o código passo a passo:
    - Aqui, o código utiliza um loop `forEach` para iterar sobre a lista de itens de carrinho e imprimir cada item. A expressão `System.out::println` é uma referência a um método que imprime os objetos para a saída padrão.
 
 Este teste é usado para verificar se a operação de listar itens de carrinho do banco de dados está funcionando corretamente. 
+
+## Teste unitário -  método testAtualizarItem()
+
+Esse método de teste tem como objetivo atualizar um item do carrinho de compras no banco de dados. 
+
+```java
+    @Test
+    public void testAtualizarItem(){
+        ItemCarrinho itemCarrinho = itemCarrinhoRepository.findById(1).get();
+
+        itemCarrinho.setQuantidade(11);
+        itemCarrinho.setProduto(new Produto(2));
+    }
+```
+
+Explicando o código passo a passo:
+
+1. `@Test`:
+   - Esta é uma anotação do JUnit que marca um método como um método de teste. Os métodos marcados com `@Test` são executados quando executa os testes unitários.
+
+2. `public void testAtualizarItem()`:
+   - Este é o método de teste em si. Ele é público, não retorna nenhum valor e tem um nome descritivo. O nome do método começa com "test", o que é uma convenção para indicar que é um método de teste.
+
+3. `ItemCarrinho itemCarrinho = itemCarrinhoRepository.findById(1).get();`:
+   - Neste trecho, o método `findById(1)` do repositório `itemCarrinhoRepository` é usado para buscar um item de carrinho no banco de dados com um ID específico (1, neste caso). O método `.get()` é usado para obter o objeto `ItemCarrinho` do `Optional<ItemCarrinho>` retornado pelo `findById`. Isso significa que o item de carrinho com ID 1 é recuperado do banco de dados e armazenado na variável `itemCarrinho`.
+
+4. Atualização de Dados:
+   - As linhas seguintes são usadas para atualizar o item de carrinho:
+     - `itemCarrinho.setQuantidade(11);`: Isso atualiza a quantidade do item de carrinho para 11 unidades.
+     - `itemCarrinho.setProduto(new Produto(2));`: Isso atualiza o produto associado ao item de carrinho para o produto com ID 2.
+
+Se parte `itemCarrinhoRepository.save(itemCarrinho);` persisti as alterações no banco de dados.
+
+Portanto, este teste demonstra a atualização de um item de carrinho.

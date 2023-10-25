@@ -58,4 +58,14 @@ public class ItemCarrinhoRepositoryTest {
 
         itensCarrinho.forEach(System.out::println);
     }
+
+    @Test
+    public void testAtualizarItem(){
+        ItemCarrinho itemCarrinho = itemCarrinhoRepository.findById(1).get();
+
+        itemCarrinho.setQuantidade(7);
+        itemCarrinho.setProduto(new Produto(2));
+
+        itemCarrinhoRepository.save(itemCarrinho);
+    }
 }
